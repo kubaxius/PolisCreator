@@ -6,7 +6,7 @@ func _ready():
 	pass
 	
 func _process(delta):
-	#change_pos()
+	change_pos()
 	pass
 	
 func change_pos():

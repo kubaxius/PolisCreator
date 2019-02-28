@@ -3,10 +3,10 @@
 extends Node
 
 #do liczenia powtórzeń
-var i = 0
+var counter = 0
 func i():
-	i = i+1
-	return i - 1
+	counter = counter+1
+	return counter - 1
 
 func _ready():
 	pass

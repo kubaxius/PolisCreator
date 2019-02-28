@@ -22,13 +22,13 @@ Camera/zoom/max=4.0
 [application]
 
 config/name="PolisCreator"
-run/main_scene="res://stage/Game.tscn"
+run/main_scene="res://stage/MainMenu.tscn"
 boot_splash/bg_color=Color( 0.560784, 0.866667, 0.937255, 1 )
 config/icon="res://icon.png"
 
 [autoload]
 
-Janitor="*res://tool/Janitor.gd"
+Tool="*res://operator/script/Tool.gd"
 
 [display]
 
