@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ground1.png-2c11ae269c319c0ef1120809869affcf.stex"
+path="res://.import/ground1.png-90be505b0db4ae342ee74f8fe6ac5d0f.stex"
 
 [deps]
 
-source_file="res://tileset/ground1.png"
-dest_files=[ "res://.import/ground1.png-2c11ae269c319c0ef1120809869affcf.stex" ]
+source_file="res://tileset/default/ground1.png"
+dest_files=[ "res://.import/ground1.png-90be505b0db4ae342ee74f8fe6ac5d0f.stex" ]
 
 [params]
 
