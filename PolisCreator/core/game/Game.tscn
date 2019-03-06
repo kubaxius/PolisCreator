@@ -7,7 +7,7 @@
 [ext_resource path="res://day_part/morning/start_animation.tres" type="Animation" id=5]
 [ext_resource path="res://day_part/night/start_animation.tres" type="Animation" id=6]
 [ext_resource path="res://menu/overlay/OverlayMenu.tscn" type="PackedScene" id=7]
-[ext_resource path="res://core/game/main_camera.gd" type="Script" id=8]
+[ext_resource path="res://core/main_camera/MainCamera.tscn" type="PackedScene" id=8]
 [ext_resource path="res://day_part/night/SkyBoxNight.tscn" type="PackedScene" id=9]
 [ext_resource path="res://day_part/evening/SkyBoxDawn.tscn" type="PackedScene" id=10]
 [ext_resource path="res://day_part/afternoon/SkyBoxAfternoon.tscn" type="PackedScene" id=11]
@@ -31,19 +31,7 @@ anims/night_start = ExtResource( 6 )
 
 [node name="OverlayMenu" parent="." instance=ExtResource( 7 )]
 
-[node name="MainCamera" type="Camera2D" parent="."]
-position = Vector2( 960, 540 )
-current = true
-smoothing_enabled = true
-smoothing_speed = 7.0
-drag_margin_left = 0.0
-drag_margin_top = 0.0
-drag_margin_right = 0.0
-drag_margin_bottom = 0.0
-script = ExtResource( 8 )
-__meta__ = {
-"_edit_lock_": true
-}
+[node name="MainCamera" parent="." instance=ExtResource( 8 )]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." groups=[
 "save",
@@ -52,6 +40,7 @@ scroll_ignore_camera_zoom = true
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2( 0.2, 0.2 )
+motion_mirroring = Vector2( 4080, 0 )
 
 [node name="SkyBoxNight" parent="ParallaxBackground/ParallaxLayer" instance=ExtResource( 9 )]
 rotation = -1.5708

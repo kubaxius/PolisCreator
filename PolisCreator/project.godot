@@ -75,6 +75,7 @@ environment/time/day_parts={
 "start": 0.875
 }
 }
+environment/map_height=0
 
 [rendering]
 
