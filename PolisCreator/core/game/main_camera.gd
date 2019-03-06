@@ -12,9 +12,9 @@ func _process(delta):
 func change_pos():
 	var current_mouse_pos = get_global_mouse_position()
 	
-	if Input.is_action_pressed("map_drag"):	
+	if Input.is_action_pressed("map_drag") and Input.is_action_pressed("mouse_down"):
 		
-		var drag_speed = ProjectSettings.get_setting("Others/Camera/drag_speed")
+		var drag_speed = ProjectSettings.get_setting("others/camera/drag_speed")
 		var diff = (last_mouse_pos - current_mouse_pos) * drag_speed
 		
 		translate(diff)
@@ -22,7 +22,7 @@ func change_pos():
 	last_mouse_pos = current_mouse_pos
 	
 func zoom(val):
-	var min_zoom = ProjectSettings.get_setting("Others/Camera/zoom/min")
-	var max_zoom = ProjectSettings.get_setting("Others/Camera/zoom/max")
+	var min_zoom = ProjectSettings.get_setting("others/camera/zoom/min")
+	var max_zoom = ProjectSettings.get_setting("others/camera/zoom/max")
 	var scale = (min_zoom * val) + (max_zoom * (1 - val))
 	zoom = Vector2(scale, scale)

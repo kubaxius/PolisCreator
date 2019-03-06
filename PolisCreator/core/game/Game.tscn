@@ -1,21 +1,35 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://core/game/game.gd" type="Script" id=1]
-[ext_resource path="res://core/game/main_camera.gd" type="Script" id=2]
-[ext_resource path="res://menu/overlay/OverlayMenu.tscn" type="PackedScene" id=3]
-[ext_resource path="res://icon.png" type="Texture" id=4]
-
-
-
-
-
-
+[ext_resource path="res://core/time_tracker/TimeTracker.tscn" type="PackedScene" id=2]
+[ext_resource path="res://day_part/afternoon/start_animation.tres" type="Animation" id=3]
+[ext_resource path="res://day_part/evening/start_animation.tres" type="Animation" id=4]
+[ext_resource path="res://day_part/morning/start_animation.tres" type="Animation" id=5]
+[ext_resource path="res://day_part/night/start_animation.tres" type="Animation" id=6]
+[ext_resource path="res://menu/overlay/OverlayMenu.tscn" type="PackedScene" id=7]
+[ext_resource path="res://core/game/main_camera.gd" type="Script" id=8]
+[ext_resource path="res://day_part/night/SkyBoxNight.tscn" type="PackedScene" id=9]
+[ext_resource path="res://day_part/evening/SkyBoxDawn.tscn" type="PackedScene" id=10]
+[ext_resource path="res://day_part/afternoon/SkyBoxAfternoon.tscn" type="PackedScene" id=11]
+[ext_resource path="res://day_part/morning/SkyBoxMorning.tscn" type="PackedScene" id=12]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="TimeTracker" parent="." groups=[
+"save",
+] instance=ExtResource( 2 )]
+
+[node name="DayPartSwitch" type="AnimationPlayer" parent="TimeTracker"]
+anims/afternoon_start = ExtResource( 3 )
+anims/evening_start = ExtResource( 4 )
+anims/morning_start = ExtResource( 5 )
+anims/night_start = ExtResource( 6 )
+
+[node name="OverlayMenu" parent="." instance=ExtResource( 7 )]
 
 [node name="MainCamera" type="Camera2D" parent="."]
 position = Vector2( 960, 540 )
@@ -26,15 +40,28 @@ drag_margin_left = 0.0
 drag_margin_top = 0.0
 drag_margin_right = 0.0
 drag_margin_bottom = 0.0
-script = ExtResource( 2 )
+script = ExtResource( 8 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="OverlayMenu" parent="." instance=ExtResource( 3 )]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." groups=[
+"save",
+]]
+scroll_ignore_camera_zoom = true
 
-[node name="Sprite" type="Sprite" parent="."]
-position = Vector2( 882.216, 520.495 )
-scale = Vector2( 3.68918, 3.5446 )
-texture = ExtResource( 4 )
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.2, 0.2 )
+
+[node name="SkyBoxNight" parent="ParallaxBackground/ParallaxLayer" instance=ExtResource( 9 )]
+rotation = -1.5708
+z_index = -9
+
+[node name="SkyBoxEvening" parent="ParallaxBackground/ParallaxLayer" instance=ExtResource( 10 )]
+rotation = -1.5708
+
+[node name="SkyBoxAfternoon" parent="ParallaxBackground/ParallaxLayer" instance=ExtResource( 11 )]
+modulate = Color( 1, 1, 1, 0 )
+
+[node name="SkyBoxMorning" parent="ParallaxBackground/ParallaxLayer" instance=ExtResource( 12 )]
 

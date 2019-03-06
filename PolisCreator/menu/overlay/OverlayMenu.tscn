@@ -10,17 +10,17 @@ func _ready():
 	connect(\"value_changed\", cam, \"zoom\")
 	
 	#set slider position to fit zoom of 1
-	var min_zoom = ProjectSettings.get_setting(\"Others/Camera/zoom/min\")
-	var max_zoom = ProjectSettings.get_setting(\"Others/Camera/zoom/max\")
+	var min_zoom = ProjectSettings.get_setting(\"others/camera/zoom/min\")
+	var max_zoom = ProjectSettings.get_setting(\"others/camera/zoom/max\")
 	value = (1-max_zoom)/(min_zoom - max_zoom)"
 
 [node name="OverlayMenu" type="CanvasLayer"]
 
 [node name="VSlider" type="VSlider" parent="."]
-margin_left = 1891.79
-margin_top = 0.357651
-margin_right = 1919.79
-margin_bottom = 1079.36
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -16.0
 max_value = 1.0
 step = 0.01
 value = 1.0

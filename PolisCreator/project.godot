@@ -13,12 +13,6 @@ _global_script_class_icons={
 
 }
 
-[Others]
-
-Camera/drag_speed=1.2
-Camera/zoom/min=0.25
-Camera/zoom/max=4.0
-
 [application]
 
 config/name="PolisCreator"
@@ -39,15 +33,51 @@ window/size/test_height=540
 window/stretch/mode="2d"
 window/stretch/aspect="keep_height"
 
+[global]
+
+load_from_save=true
+level_to_load="res://map/default/DefaultMap.tscn"
+_global_script_class_icons={
+
+}
+
 [input]
 
 map_drag={
+"deadzone": 0.5,
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":32,"unicode":0,"echo":false,"script":null)
+ ]
+}
+mouse_down={
 "deadzone": 0.5,
 "events": [ Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"button_mask":0,"position":Vector2( 0, 0 ),"global_position":Vector2( 0, 0 ),"factor":1.0,"button_index":1,"pressed":false,"doubleclick":false,"script":null)
  ]
 }
 
+[others]
+
+camera/drag_speed=1
+camera/zoom/min=0.25
+camera/zoom/max=4
+environment/time/day_length=24
+environment/time/scale=1
+environment/time/day_parts={
+"afternoon": {
+"start": 0.5
+},
+"evening": {
+"start": 0.75
+},
+"morning": {
+"start": 0.25
+},
+"night": {
+"start": 0.875
+}
+}
+
 [rendering]
 
+quality/2d/use_pixel_snap=true
 environment/default_clear_color=Color( 0.560784, 0.866667, 0.937255, 1 )
 environment/default_environment="res://default_env.tres"
