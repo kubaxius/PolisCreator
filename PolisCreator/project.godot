@@ -57,8 +57,8 @@ mouse_down={
 [others]
 
 camera/drag_speed=1
-camera/zoom/min=0.25
-camera/zoom/max=4
+camera/zoom/min=0.5
+camera/zoom/max=2
 environment/time/day_length=24
 environment/time/scale=1
 environment/time/day_parts={
