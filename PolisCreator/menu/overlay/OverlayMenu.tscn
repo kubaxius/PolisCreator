@@ -6,7 +6,7 @@ script/source = "extends VSlider
 
 func _ready():
 	#connect slider to zoom function
-	var cam = get_node(\"/root/Tool\").get_main_node().get_node(\"MainCamera\")
+	var cam = get_tree().get_nodes_in_group(\"MAIN_CAMERA\")[0]
 	connect(\"value_changed\", cam, \"zoom\")
 	
 	#set slider position to fit zoom of 1

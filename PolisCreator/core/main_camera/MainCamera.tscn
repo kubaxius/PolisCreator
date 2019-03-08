@@ -2,7 +2,9 @@
 
 [ext_resource path="res://core/main_camera/main_camera.gd" type="Script" id=1]
 
-[node name="MainCamera" type="Camera2D"]
+[node name="MainCamera" type="Camera2D" groups=[
+"MAIN_CAMERA",
+]]
 position = Vector2( 960, 540 )
 current = true
 smoothing_enabled = true
