@@ -1,0 +1,15 @@
+[remap]
+
+importer="bitmap"
+type="BitMap"
+path="res://.import/movement_map.png-b06afc5f59f067aec53cf4d116f5c380.res"
+
+[deps]
+
+source_file="res://mob/base/movement_map.png"
+dest_files=[ "res://.import/movement_map.png-b06afc5f59f067aec53cf4d116f5c380.res" ]
+
+[params]
+
+create_from=0
+threshold=0.5

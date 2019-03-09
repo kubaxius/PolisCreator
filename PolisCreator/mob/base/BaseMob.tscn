@@ -1,0 +1,29 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://mob/base/base_mob.gd" type="Script" id=1]
+[ext_resource path="res://mob/base/movement_map.png" type="BitMap" id=2]
+[ext_resource path="res://mob/base/artificial_intelligence/artificial_intelligence.gd" type="Script" id=3]
+[ext_resource path="res://mob/base/state_machine.gd" type="Script" id=4]
+[ext_resource path="res://mob/base/state/idle.gd" type="Script" id=5]
+
+[node name="BaseMob" type="KinematicBody2D"]
+script = ExtResource( 1 )
+movement_bitmap = ExtResource( 2 )
+position_on_movement_bitmap = Vector2( 1, 1 )
+
+[node name="AI" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 4 )
+START_STATE = NodePath("../../BaseMob/StateMachine/Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource( 5 )
+
+[node name="Graphic" type="Node2D" parent="."]
+
+[node name="Skeleton" type="Skeleton2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+

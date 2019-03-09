@@ -1,10 +1,11 @@
 """
-State interface for Entities
+State interface for Mobs
 """
 
 extends Node
 
-var pushdown: bool = false
+var pushdown := false
+var motion := Vector2(0, 0)
 
 signal finished(next_state_name)
 

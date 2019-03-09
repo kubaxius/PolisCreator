@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://core/game/game.gd" type="Script" id=1]
 [ext_resource path="res://core/time_tracker/TimeTracker.tscn" type="PackedScene" id=2]
@@ -12,6 +12,7 @@
 [ext_resource path="res://day_part/evening/SkyBoxDawn.tscn" type="PackedScene" id=10]
 [ext_resource path="res://day_part/afternoon/SkyBoxAfternoon.tscn" type="PackedScene" id=11]
 [ext_resource path="res://day_part/morning/SkyBoxMorning.tscn" type="PackedScene" id=12]
+[ext_resource path="res://mob/person/Person.tscn" type="PackedScene" id=13]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -36,9 +37,11 @@ anims/night_start = ExtResource( 6 )
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." groups=[
 "save",
 ]]
+editor/display_folded = true
 scroll_ignore_camera_zoom = true
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+editor/display_folded = true
 motion_scale = Vector2( 0.2, 0.2 )
 motion_mirroring = Vector2( 4080, 0 )
 
@@ -53,4 +56,10 @@ rotation = -1.5708
 modulate = Color( 1, 1, 1, 0 )
 
 [node name="SkyBoxMorning" parent="ParallaxBackground/ParallaxLayer" instance=ExtResource( 12 )]
+
+[node name="Entities" type="Node2D" parent="."]
+
+[node name="Person" parent="Entities" instance=ExtResource( 13 )]
+position = Vector2( 863, 320 )
+gravitational_acceleration = 40.0
 

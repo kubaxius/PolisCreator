@@ -1,14 +1,17 @@
 extends Node2D
 
-#checks if object with given height will fit on a tile 
-func can_it_fit(height: int, pos: Vector2) -> bool:
+var tile_size = 128
+
+func vector_to_tile_pos(vpos: Vector2) -> Vector2:
+	var tpos = Vector2()
+	tpos = vpos/tile_size
+	tpos = (tpos as Vector2).floor()
 	
-	var tile_map = $Ground
+	return tpos
 	
-	if not tile_map.walkable_tiles.has(tile_map.get_cellv(Vector2(pos.x, pos.y + 1))):
-		return false
-	
-	for cell_y in range(height):
-		if tile_map.get_cellv(pos + Vector2(0, -cell_y)) != -1:
-			return false
-	return true
+func get_teleport(pos: Vector2):
+	var space_state = get_world_2d().direct_space_state
+	for object in space_state.intersect_point(pos, 32, [], 2):
+		if object.collider.owner.is_in_group("teleports"):
+			return object.collider.owner
+	return false
