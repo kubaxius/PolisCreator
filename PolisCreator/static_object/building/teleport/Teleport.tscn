@@ -14,6 +14,7 @@ extents = Vector2( 64, 128 )
 "teleports",
 ]]
 collision_layer = 2
+collision_mask = 2
 script = ExtResource( 1 )
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
@@ -35,6 +36,7 @@ __meta__ = {
 
 [node name="TeleportingArea" type="KinematicBody2D" parent="."]
 collision_layer = 2
+collision_mask = 2
 __meta__ = {
 "_edit_group_": true
 }

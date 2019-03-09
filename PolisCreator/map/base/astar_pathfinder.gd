@@ -151,9 +151,8 @@ func get_tile_path(vstart: Vector2, vend: Vector2, vheight: int, predicted_possi
 	
 	if found:
 		for point in astar_node.get_point_path(points_indexes[tstart], points_indexes[tend]):
-			path.append(v3tov2(point) *owner.tile_size + Vector2(owner.tile_size/2, owner.tile_size/2))
-	
-	$DebugLine.points = path
+			path.append(v3tov2(point))
+			$DebugLine.add_point(v3tov2(point) * owner.tile_size + Vector2(owner.tile_size/2, owner.tile_size/2))
 	
 	#Clear global variables.
 	iterator = 0

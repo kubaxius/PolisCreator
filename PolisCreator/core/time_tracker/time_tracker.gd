@@ -29,7 +29,6 @@ func switch_day_part(current_day_time: float):
 		if new_difference >= 0 and new_difference < last_difference and day_part != current_day_part:
 			current_day_part = day_part
 			get_child(0).play(current_day_part+"_start")
-			print(current_day_part)
 			
 
 func _process(delta):

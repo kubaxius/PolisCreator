@@ -1,16 +1,21 @@
 extends KinematicBody2D
 
-export(float) var gravitational_acceleration = 10
+export(bool) var movable_by_player = false
+export(bool) var movable_by_AI = true
+export(int) var gravitational_acceleration = 40
 export(Vector2) var up = Vector2(0, -1)
 export(BitMap) var movement_bitmap: BitMap
 export(Vector2) var position_on_movement_bitmap
 export(bool) var can_use_portals = false
 
+var motion := Vector2(0, 0)
+var movement_direction: int = 0
+var on_ground_friction := 0.2
+
 var possible_moves: PoolVector2Array
 
 func _ready():
 	_set_possible_moves()
-	
 
 func _set_possible_moves():
 	var moves_array = []
@@ -26,13 +31,3 @@ func get_map():
 	#check if map is loaded
 	assert(get_tree().get_nodes_in_group("MAP").size() != -1)
 	return get_tree().get_nodes_in_group("MAP")[0]
-	
-func _unhandled_input(event):
-	if event is InputEventMouseButton and event.pressed:
-		#print(get_map().get_node("AStarPathfinder").where_can_move(position, 250))
-		get_map().get_node("AStarPathfinder").get_tile_path(
-				position,
-				get_map().get_local_mouse_position(),
-				250,
-				possible_moves,
-				can_use_portals)

@@ -12,3 +12,6 @@ func _get_destination_pos():
 		return get_node(destination_teleport).global_position
 	else:
 		return false
+		
+func teleport(node):
+	node.global_position = _get_destination_pos()

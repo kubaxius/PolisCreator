@@ -29,7 +29,12 @@ func set_active(value):
 		current_state = null
 		
 func _AI_input(event):
-	current_state.handle_input(event)
+	if owner.movable_by_AI:
+		current_state.handle_input(event)
+
+func _unhandled_input(event):
+	if owner.movable_by_player:
+		current_state.handle_input(event)
 
 func _physics_process(delta):
 	current_state.update(delta)

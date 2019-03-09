@@ -61,5 +61,4 @@ modulate = Color( 1, 1, 1, 0 )
 
 [node name="Person" parent="Entities" instance=ExtResource( 13 )]
 position = Vector2( 863, 320 )
-gravitational_acceleration = 40.0
 
