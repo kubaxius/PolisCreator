@@ -3,8 +3,8 @@
 [ext_resource path="res://mob/base/BaseMob.tscn" type="PackedScene" id=1]
 [ext_resource path="res://mob/person/sprite/body_profile1.png" type="Texture" id=2]
 
-[node name="Person" instance=ExtResource( 1 )]
-movable_by_player = true
+[node name="Person" index="0" instance=ExtResource( 1 )]
+collision_layer = 4
 can_use_portals = true
 
 [node name="StateMachine" parent="." index="1"]

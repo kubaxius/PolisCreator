@@ -12,9 +12,8 @@ var _active = false setget set_active
 func _ready():
 	for child in get_children():
 		child.connect("finished", self, "_change_state")
-		child.owner = get_parent()
-	get_parent().get_node("AI").connect("simulate_input", self, "_AI_input")
 	initialize(START_STATE)
+	owner.connect("event_map_changed", self, "event_map_changed")
 
 func initialize(start_state):
 	set_active(true)
@@ -27,14 +26,9 @@ func set_active(value):
 	set_physics_process(value)
 	if not _active:
 		current_state = null
-		
-func _AI_input(event):
-	if owner.movable_by_AI:
-		current_state.handle_input(event)
 
-func _unhandled_input(event):
-	if owner.movable_by_player:
-		current_state.handle_input(event)
+func event_map_changed(event_map):
+	current_state.event_map_changed(event_map)
 
 func _physics_process(delta):
 	current_state.update(delta)
@@ -43,7 +37,6 @@ func _change_state(state_name):
 	if not _active:
 		return
 	current_state.exit()
-	
 	if state_name == "previous":
 		states_stack.pop_front()
 	else:

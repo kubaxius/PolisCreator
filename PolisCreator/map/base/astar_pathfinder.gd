@@ -7,7 +7,6 @@ var points_indexes = {}
 var iterator = 0
 
 func _ready():
-	owner = get_parent()
 	pass
 
 func v2tov3(v2: Vector2) -> Vector3:
@@ -31,7 +30,7 @@ Returns:
 """ 
 func can_it_stand_here(tpos: Vector2, theight: int) -> bool:
 
-	var tile_map = $"../Ground"
+	var tile_map = owner.get_map().get_node("Ground")
 
 	#Check if tile that we want to stand on even gives us a posibility to do so.
 	if not tile_map.walkable_tiles.has(tile_map.get_cellv(Vector2(tpos.x, tpos.y + 1))):
@@ -61,9 +60,9 @@ Return:
 	
 """
 func where_can_move(vpos: Vector2, vheight: int, predicted_possible_moves = [], can_use_teleports := false) -> PoolVector2Array:
-	var tpos = owner.vector_to_tile_pos(vpos)
+	var tpos = owner.get_map().vector_to_tile_pos(vpos)
 	var possible_moves = []
-	var theight = ceil(vheight/owner.tile_size)
+	var theight = ceil(vheight/owner.get_map().tile_size)
 	
 	if predicted_possible_moves.size() > 0:
 		for move in predicted_possible_moves:
@@ -78,9 +77,9 @@ func where_can_move(vpos: Vector2, vheight: int, predicted_possible_moves = [], 
 					possible_moves.append(move+tpos)
 	
 	if can_use_teleports:
-		var teleport = owner.get_teleport(vpos)
+		var teleport = owner.get_map().get_teleport(vpos)
 		if teleport and teleport.destination_pos:
-			possible_moves.append(owner.vector_to_tile_pos(owner.get_teleport(vpos).destination_pos))
+			possible_moves.append(owner.get_map().vector_to_tile_pos(owner.get_map().get_teleport(vpos).destination_pos))
 	
 	return possible_moves
 
@@ -113,8 +112,8 @@ func get_tile_path(vstart: Vector2, vend: Vector2, vheight: int, predicted_possi
 	
 	$DebugLine.points = []
 	
-	var tstart = owner.vector_to_tile_pos(vstart)
-	var tend = owner.vector_to_tile_pos(vend)
+	var tstart = owner.get_map().vector_to_tile_pos(vstart)
+	var tend = owner.get_map().vector_to_tile_pos(vend)
 	
 	var to_check = [tstart]
 	add_point_to_astar(tstart)
@@ -135,7 +134,7 @@ func get_tile_path(vstart: Vector2, vend: Vector2, vheight: int, predicted_possi
 		point = to_check.pop_front()
 		
 		to_add = where_can_move(
-				point*owner.tile_size + Vector2(owner.tile_size/2, owner.tile_size/2),
+				point*owner.get_map().tile_size + Vector2(owner.get_map().tile_size/2, owner.get_map().tile_size/2),
 				vheight,
 				predicted_possible_moves,
 				can_use_teleports)
@@ -152,7 +151,7 @@ func get_tile_path(vstart: Vector2, vend: Vector2, vheight: int, predicted_possi
 	if found:
 		for point in astar_node.get_point_path(points_indexes[tstart], points_indexes[tend]):
 			path.append(v3tov2(point))
-			$DebugLine.add_point(v3tov2(point) * owner.tile_size + Vector2(owner.tile_size/2, owner.tile_size/2))
+			$DebugLine.add_point(v3tov2(point) * owner.get_map().tile_size + Vector2(owner.get_map().tile_size/2, owner.get_map().tile_size/2))
 	
 	#Clear global variables.
 	iterator = 0

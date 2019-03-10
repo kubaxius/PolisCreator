@@ -1,5 +1,10 @@
 extends Node
 
+"""
+DO NOT WORK
+"""
+
+
 var path = []
 var direction := Vector2(0, 0)
 var current_destination := Vector2(0, 0)
@@ -20,11 +25,11 @@ func _ready():
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton and event.pressed:
-		path = owner.get_map().get_node("AStarPathfinder").get_tile_path(
+		path = $AStarPathfinder.get_tile_path(
 				owner.position,
 				owner.get_map().get_local_mouse_position(),
 				250,
-				owner.possible_moves,
+				[],
 				owner.can_use_portals)
 
 func _process(delta):
@@ -36,7 +41,6 @@ func _process(delta):
 		
 		direction = new_direction
 		destination_changed()
-		
 		
 	
 func destination_changed():
