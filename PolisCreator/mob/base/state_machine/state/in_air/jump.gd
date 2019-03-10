@@ -1,6 +1,6 @@
 extends "in_air.gd"
 
-export(int) var jump_acceleration = 1100
+export(int) var jump_acceleration = 1000
 
 func enter():
 	.enter()

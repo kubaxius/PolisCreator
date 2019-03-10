@@ -5,8 +5,11 @@ export(int) var max_steps = 300
 
 var points_indexes = {}
 var iterator = 0
+var tile_size = 0
 
 func _ready():
+	yield(get_tree(), "idle_frame")
+	tile_size = Tool.get_main_scene("MAP").tile_size
 	pass
 
 func v2tov3(v2: Vector2) -> Vector3:
@@ -30,7 +33,7 @@ Returns:
 """ 
 func can_it_stand_here(tpos: Vector2, theight: int) -> bool:
 
-	var tile_map = owner.get_map().get_node("Ground")
+	var tile_map = Tool.get_main_scene("MAP").get_node("Ground")
 
 	#Check if tile that we want to stand on even gives us a posibility to do so.
 	if not tile_map.walkable_tiles.has(tile_map.get_cellv(Vector2(tpos.x, tpos.y + 1))):
@@ -60,9 +63,9 @@ Return:
 	
 """
 func where_can_move(vpos: Vector2, vheight: int, predicted_possible_moves = [], can_use_teleports := false) -> PoolVector2Array:
-	var tpos = owner.get_map().vector_to_tile_pos(vpos)
+	var tpos = Tool.vector_to_tile_pos(vpos)
 	var possible_moves = []
-	var theight = ceil(vheight/owner.get_map().tile_size)
+	var theight = ceil(vheight/tile_size)
 	
 	if predicted_possible_moves.size() > 0:
 		for move in predicted_possible_moves:
@@ -77,9 +80,9 @@ func where_can_move(vpos: Vector2, vheight: int, predicted_possible_moves = [], 
 					possible_moves.append(move+tpos)
 	
 	if can_use_teleports:
-		var teleport = owner.get_map().get_teleport(vpos)
-		if teleport and teleport.destination_pos:
-			possible_moves.append(owner.get_map().vector_to_tile_pos(owner.get_map().get_teleport(vpos).destination_pos))
+		for collider in Tool.check_for_colliders(vpos):
+			if collider.is_in_group("teleports") and collider.destination_pos:
+				possible_moves.append(Tool.vector_to_tile_pos(collider.destination_pos))
 	
 	return possible_moves
 
@@ -112,8 +115,8 @@ func get_tile_path(vstart: Vector2, vend: Vector2, vheight: int, predicted_possi
 	
 	$DebugLine.points = []
 	
-	var tstart = owner.get_map().vector_to_tile_pos(vstart)
-	var tend = owner.get_map().vector_to_tile_pos(vend)
+	var tstart = Tool.vector_to_tile_pos(vstart)
+	var tend = Tool.vector_to_tile_pos(vend)
 	
 	var to_check = [tstart]
 	add_point_to_astar(tstart)
@@ -134,7 +137,7 @@ func get_tile_path(vstart: Vector2, vend: Vector2, vheight: int, predicted_possi
 		point = to_check.pop_front()
 		
 		to_add = where_can_move(
-				point*owner.get_map().tile_size + Vector2(owner.get_map().tile_size/2, owner.get_map().tile_size/2),
+				point*tile_size + Vector2(tile_size/2, tile_size/2),
 				vheight,
 				predicted_possible_moves,
 				can_use_teleports)
@@ -151,11 +154,40 @@ func get_tile_path(vstart: Vector2, vend: Vector2, vheight: int, predicted_possi
 	if found:
 		for point in astar_node.get_point_path(points_indexes[tstart], points_indexes[tend]):
 			path.append(v3tov2(point))
-			$DebugLine.add_point(v3tov2(point) * owner.get_map().tile_size + Vector2(owner.get_map().tile_size/2, owner.get_map().tile_size/2))
+			$DebugLine.add_point(v3tov2(point) * tile_size + Vector2(tile_size/2, tile_size/2))
 	
 	#Clear global variables.
 	iterator = 0
 	points_indexes = {}
 	astar_node.clear()
+	
+	return path
+	
+func get_teleports(path: Array):
+	var teleports = []
+	
+	for i in range(0, path.size() - 1):
+		#Just checks if distance from this point to the next is bigger than 2 tiles.
+		if path[i].distance_to(path[i+1]) > 2:
+			teleports.append(path[i])
+	
+	return teleports
+	
+func simplify_path(path: Array):
+	var to_remove = []
+	
+	for i in range(1, path.size() - 1):
+		#counts lengths of triangle sides that 3 points create
+		var side1 = path[i-1].distance_to(path[i+1])
+		var side2 = path[i].distance_to(path[i+1])
+		var side3 = path[i].distance_to(path[i-1])
+		#If two sides of triangle == 3rd side, then these points lies on the same line, 
+		#ergo we can remove the one in center. Unless they are apart more than 2 tiles,
+		#which means that teleport has to be used.
+		if side1 == side2+side3 and side2 < 2 and side3 < 2:
+			to_remove.append(path[i])
+	
+	for i in to_remove:
+		path.erase(i)
 	
 	return path

@@ -58,7 +58,8 @@ modulate = Color( 1, 1, 1, 0 )
 [node name="SkyBoxMorning" parent="ParallaxBackground/ParallaxLayer" instance=ExtResource( 12 )]
 
 [node name="Entities" type="Node2D" parent="."]
+z_index = 1
 
 [node name="Person" parent="Entities" instance=ExtResource( 13 )]
-position = Vector2( 704, 576 )
+position = Vector2( 256, 649.7 )
 

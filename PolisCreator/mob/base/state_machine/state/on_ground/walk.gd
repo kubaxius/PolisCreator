@@ -8,6 +8,7 @@ func _ready():
 func enter():
 	if !(owner.event_map.has("move_left") or owner.event_map.has("move_right")):
 		emit_signal("finished", "Idle")
+	owner.get_node("AnimationPlayer").play("walk")
 
 func update(delta):
 	.update(delta)

@@ -2,7 +2,6 @@ extends KinematicBody2D
 
 export(bool) var movable_by_player = false
 export(bool) var movable_by_AI = true
-export(int) var gravitational_acceleration = 40
 export(Vector2) var up = Vector2(0, -1)
 export(bool) var can_use_portals = false
 
@@ -16,12 +15,8 @@ var event_map = []
 func _ready():
 	$AI.connect("simulate_input", self, "_AI_input")
 
-func get_map():
-	#check if map is loaded
-	assert(get_tree().get_nodes_in_group("MAP").size() != -1)
-	return get_tree().get_nodes_in_group("MAP")[0]
-
 func _AI_input(event):
+	
 	if movable_by_AI:
 		map_event(event)
 

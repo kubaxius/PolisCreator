@@ -1,15 +1,14 @@
 extends Node
 
-"""
-DO NOT WORK
-"""
-
-
 var path = []
-var direction := Vector2(0, 0)
-var current_destination := Vector2(0, 0)
+var teleports_on_path = []
+var direction := Vector2(0, 0) setget _set_direction
+var tpos = Vector2()
+
+var jump_timer
 
 signal simulate_input(Event)
+signal direction_changed
 
 func generate_action(action: String, pressed: bool) -> InputEventAction:
 	var new_event = InputEventAction.new()
@@ -19,38 +18,48 @@ func generate_action(action: String, pressed: bool) -> InputEventAction:
 	
 	return new_event
 
+func single_button_press(action_name: String):
+	var action = generate_action(action_name, true)
+	emit_signal("simulate_input", action)
+	
+	#Stop function execution to the next frame
+	yield(get_tree(), "idle_frame")
+	
+	action = generate_action(action_name, false)
+	emit_signal("simulate_input", action)
+
 func _ready():
-	owner = get_parent()
+	connect("direction_changed", self, "_direction_changed")
 	pass
 
 func _unhandled_input(event):
-	if event is InputEventMouseButton and event.pressed:
-		path = $AStarPathfinder.get_tile_path(
-				owner.position,
-				owner.get_map().get_local_mouse_position(),
-				250,
-				[],
-				owner.can_use_portals)
+	#debug_pathfinding(event)
+	pass
 
 func _process(delta):
-	if path.size() > 0:
-		var new_direction = -(owner.get_map().vector_to_tile_pos(owner.position) - path[0])
-		
-		if new_direction == Vector2(0, 0):
-			path.pop_front()
-		
-		direction = new_direction
-		destination_changed()
-		
-	
-func destination_changed():
-	set_walking(direction.x)
-	if direction.y < 0:
-		jump()
+	tpos = Tool.vector_to_tile_pos(owner.position)
+	follow_direction()
 
-func jump():
-	var action = generate_action("jump", true)
-	emit_signal("simulate_input", action)
+func follow_direction():
+	if path.size() == 0 and direction != Vector2(0, 0):
+		self.direction = Vector2(0, 0)
+	
+	if path.size() != 0:
+		if tpos == path[0]:
+			if teleports_on_path.has(path[0]):
+				single_button_press("use")
+			path.pop_front()
+			
+		elif direction != (path[0] - tpos):
+			self.direction = path[0] - tpos
+
+func start_jumping():
+	var jump = generate_action("jump", true)
+	emit_signal("simulate_input", jump)
+
+func stop_jumping():
+	var jump = generate_action("jump", false)
+	emit_signal("simulate_input", jump)
 
 func set_walking(direction: int):
 	var action
@@ -71,3 +80,26 @@ func _stop_walking():
 	
 	emit_signal("simulate_input", stop_right_action)
 	emit_signal("simulate_input", stop_left_action)
+
+func _set_direction(value):
+	direction = value
+	emit_signal("direction_changed")
+
+func _direction_changed():
+	set_walking(direction.x)
+	if direction.y < 0:
+		start_jumping()
+	else:
+		stop_jumping()
+	pass
+	
+func debug_pathfinding(event):
+	if event is InputEventMouseButton and event.pressed:
+		path = $AStarPathfinder.get_tile_path(
+				owner.position,
+				Tool.get_main_scene("MAP").get_local_mouse_position(),
+				250,
+				[],
+				owner.can_use_portals)
+		teleports_on_path = $AStarPathfinder.get_teleports(path)
+		path = $AStarPathfinder.simplify_path(path)

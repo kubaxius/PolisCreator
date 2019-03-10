@@ -20,6 +20,10 @@ run/main_scene="res://menu/main/MainMenu.tscn"
 boot_splash/bg_color=Color( 0.560784, 0.866667, 0.937255, 1 )
 config/icon="res://icon.png"
 
+[autoload]
+
+Tool="*res://core/singleton/tool/Tool.tscn"
+
 [display]
 
 window/size/width=1920
@@ -62,13 +66,17 @@ jump={
 }
 use={
 "deadzone": 0.5,
-"events": [  ]
+"events": [ Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":0,"alt":false,"shift":false,"control":false,"meta":false,"command":false,"pressed":false,"scancode":69,"unicode":0,"echo":false,"script":null)
+ ]
 }
 
 [layer_names]
 
-2d_physics/layer_2="portals"
+2d_physics/layer_2="usable_things"
 2d_physics/layer_3="people"
+2d_render/layer_4="buildings_transparency"
+2d_physics/layer_4="buildings"
+2d_physics/layer_5="building_walls"
 
 [others]
 
