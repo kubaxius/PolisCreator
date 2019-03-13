@@ -23,6 +23,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Tool="*res://core/singleton/tool/Tool.tscn"
+PathFinder="*res://core/singleton/pathfinder/PathFinder.tscn"
 
 [display]
 
@@ -100,6 +101,7 @@ environment/time/day_parts={
 }
 }
 environment/map_height=0
+environment/mob_pathfinding_groups=[ "people" ]
 
 [rendering]
 

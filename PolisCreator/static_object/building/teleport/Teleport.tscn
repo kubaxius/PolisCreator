@@ -3,7 +3,6 @@
 [ext_resource path="res://static_object/building/teleport/teleport.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
-
 extents = Vector2( 64, 128 )
 
 [node name="Teleport" type="StaticBody2D" groups=[
@@ -31,4 +30,6 @@ __meta__ = {
 }
 
 [node name="Spawner" type="Position2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
 

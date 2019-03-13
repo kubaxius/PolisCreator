@@ -3,6 +3,9 @@
 importer="texture"
 type="StreamTexture"
 path="res://.import/domus_inside1.png-c82337e88483694fef58091c7c3566ef.stex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 

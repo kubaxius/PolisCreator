@@ -3,6 +3,9 @@
 importer="texture"
 type="StreamTexture"
 path="res://.import/domus1_clear_mask.png-1395f383e468d7176cc91c880ed35e55.stex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 

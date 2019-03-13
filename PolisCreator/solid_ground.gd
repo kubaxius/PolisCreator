@@ -1,6 +1,6 @@
 extends TileMap
 
-export(Array, int) var walkable_tiles = [0]
+export(Array, int) var standable_tiles = [0]
 
 func _ready():
 	pass

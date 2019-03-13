@@ -2,12 +2,7 @@ extends "on_ground.gd"
 
 export(int) var walk_speed = 400
 
-func _ready():
-	pass
-
 func enter():
-	if !(owner.event_map.has("move_left") or owner.event_map.has("move_right")):
-		emit_signal("finished", "Idle")
 	owner.get_node("AnimationPlayer").play("walk")
 
 func update(delta):
@@ -18,7 +13,11 @@ func update(delta):
 	
 	if move_left > move_right:
 		owner.motion.x = -walk_speed
+		if owner.direction != owner.DIRECTION_LEFT:
+			owner.direction = owner.DIRECTION_LEFT
 	elif move_left < move_right:
 		owner.motion.x = walk_speed
+		if owner.direction != owner.DIRECTION_RIGHT:
+			owner.direction = owner.DIRECTION_RIGHT
 	else:
 		emit_signal("finished", "Idle")

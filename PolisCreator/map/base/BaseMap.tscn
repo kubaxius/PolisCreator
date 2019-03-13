@@ -32,6 +32,14 @@ destination_teleport = NodePath("../Teleport4")
 position = Vector2( 3520, -320 )
 destination_teleport = NodePath("../Teleport3")
 
+[node name="Teleport5" parent="Buildings" instance=ExtResource( 2 )]
+position = Vector2( 1984, 832 )
+destination_teleport = NodePath("../Teleport6")
+
+[node name="Teleport6" parent="Buildings" instance=ExtResource( 2 )]
+position = Vector2( 1062.4, 832 )
+destination_teleport = NodePath("../Teleport5")
+
 [node name="Ground" type="TileMap" parent="."]
 z_index = 2
 tile_set = ExtResource( 3 )
