@@ -1,4 +1,4 @@
-extends Node
+extends "res://mob/base/base_mob.gd"
 
 var needs = {
 	"food": 0,
@@ -26,6 +26,8 @@ func _ready():
 
 func _process(delta):
 	increase_needs(delta)
+	if not is_instance_valid(home):
+		find_home()
 
 func increase_needs(delta):
 	for key in needs.keys():
@@ -35,4 +37,8 @@ func increase_needs(delta):
 				needs[key] = 1
 
 func find_home():
-	pass
+	var buildings = get_tree().get_nodes_in_group("residential_buildings")
+	for building in buildings:
+		if building.inhabitants.size() < building.capacity:
+			home = building
+			home.inhabitants.append(self)

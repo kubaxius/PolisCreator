@@ -37,7 +37,7 @@ position = Vector2( 1984, 832 )
 destination_teleport = NodePath("../Teleport6")
 
 [node name="Teleport6" parent="Buildings" instance=ExtResource( 2 )]
-position = Vector2( 1062.4, 832 )
+position = Vector2( 1088, 832 )
 destination_teleport = NodePath("../Teleport5")
 
 [node name="Ground" type="TileMap" parent="."]
@@ -56,5 +56,5 @@ cell_size = Vector2( 128, 128 )
 format = 1
 
 [node name="Domus" parent="." instance=ExtResource( 6 )]
-position = Vector2( 448, 640 )
+position = Vector2( 514.64, 640 )
 

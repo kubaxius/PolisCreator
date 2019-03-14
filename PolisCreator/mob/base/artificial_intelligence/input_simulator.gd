@@ -30,7 +30,7 @@ func set_walking(direction: int):
 		action = _generate_action("move_left", true)
 		
 	emit_signal("simulate_input", action)
-	
+
 func start_jumping():
 	var jump = _generate_action("jump", true)
 	emit_signal("simulate_input", jump)
@@ -38,7 +38,7 @@ func start_jumping():
 func stop_jumping():
 	var jump = _generate_action("jump", false)
 	emit_signal("simulate_input", jump)
-	
+
 func single_button_press(action_name: String):
 	var action = _generate_action(action_name, true)
 	emit_signal("simulate_input", action)

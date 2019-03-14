@@ -7,13 +7,14 @@
 [ext_resource path="res://static_object/building/residential/domus/sprite/domus1_transparency_mask.png" type="Texture" id=5]
 [ext_resource path="res://static_object/building/base/animations/hide_inside.tres" type="Animation" id=6]
 [ext_resource path="res://static_object/building/base/animations/show_inside.tres" type="Animation" id=7]
-[ext_resource path="res://static_object/building/residential/domus/door.gd" type="Script" id=8]
+[ext_resource path="res://static_object/building/residential/domus/entrance.gd" type="Script" id=8]
 
 [sub_resource type="RectangleShape2D" id=1]
-
 extents = Vector2( 72, 132 )
 
-[node name="Domus" type="StaticBody2D"]
+[node name="Domus" type="StaticBody2D" groups=[
+"residential_buildings",
+]]
 collision_layer = 8
 script = ExtResource( 1 )
 
@@ -25,6 +26,7 @@ light_mask = 8
 texture = ExtResource( 3 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
 polygon = PoolVector2Array( -384, 288, -384, -112, 0, -240, 384, -112, 384, 288 )
 
 [node name="ClearMask" type="Light2D" parent="."]
@@ -42,13 +44,20 @@ range_item_cull_mask = 8
 anims/hide_inside = ExtResource( 6 )
 anims/show_inside = ExtResource( 7 )
 
-[node name="Door" type="StaticBody2D" parent="." groups=[
+[node name="Entrance" type="StaticBody2D" parent="." groups=[
 "usable",
 ]]
 collision_layer = 2
 script = ExtResource( 8 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Door"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Entrance"]
+visible = false
 position = Vector2( -192, 156 )
 shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Entrance" type="Position2D" parent="Entrance"]
+position = Vector2( -192, 224 )
 

@@ -61,5 +61,5 @@ modulate = Color( 1, 1, 1, 0 )
 z_index = 1
 
 [node name="Person" parent="Entities" instance=ExtResource( 13 )]
-position = Vector2( 281, 817.7 )
+position = Vector2( 1216, 817.7 )
 
