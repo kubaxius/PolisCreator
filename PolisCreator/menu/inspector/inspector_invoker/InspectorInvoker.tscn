@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://menu/inspector/inspector_invoker/inspector_invoker.gd" type="Script" id=1]
+
+[node name="InspectorInvoker" type="VBoxContainer"]
+margin_right = 499.0
+margin_bottom = 32.0
+script = ExtResource( 1 )
+

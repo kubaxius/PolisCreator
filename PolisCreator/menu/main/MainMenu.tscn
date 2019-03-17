@@ -36,4 +36,5 @@ margin_top = 306.0
 margin_right = 407.0
 margin_bottom = 388.0
 text = "QUIT"
+quit_game = true
 

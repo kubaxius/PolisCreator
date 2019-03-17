@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://mob/base/base_mob.gd" type="Script" id=1]
 [ext_resource path="res://mob/base/artificial_intelligence/artificial_intelligence.gd" type="Script" id=2]
@@ -11,6 +11,22 @@
 [ext_resource path="res://mob/base/state_machine/state/in_air/falling.gd" type="Script" id=9]
 
 [sub_resource type="GDScript" id=1]
+script/source = "#HitPoints
+extends Node
+
+export(int) var max_level
+var current_level setget _set_current_health_level
+
+signal health_changed(current_level)
+
+func _ready():
+	pass
+
+func _set_current_health_level(current):
+	current_level = current
+	emit_signal(\"health_changed\", current)"
+
+[sub_resource type="GDScript" id=2]
 script/source = "extends Line2D
 
 func _ready():
@@ -21,7 +37,13 @@ func _ready():
 script = ExtResource( 1 )
 movable_by_player = true
 
+[node name="Statistics" type="Node" parent="."]
+
+[node name="HitPoints" type="Node" parent="Statistics"]
+script = SubResource( 1 )
+
 [node name="AI" type="Node" parent="."]
+editor/display_folded = true
 script = ExtResource( 2 )
 
 [node name="InputSimulator" type="Node" parent="AI"]
@@ -32,9 +54,10 @@ script = ExtResource( 4 )
 
 [node name="DebugLine" type="Line2D" parent="AI"]
 texture_mode = 3080292
-script = SubResource( 1 )
+script = SubResource( 2 )
 
 [node name="StateMachine" type="Node" parent="."]
+editor/display_folded = true
 script = ExtResource( 5 )
 START_STATE = NodePath("../../BaseMob/StateMachine/Idle")
 

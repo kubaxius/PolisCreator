@@ -1,0 +1,1 @@
+extends "res://mob/base/base_mob.gd"

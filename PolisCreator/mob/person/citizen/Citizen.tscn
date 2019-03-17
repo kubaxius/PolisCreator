@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://mob/person/base/BasePerson.tscn" type="PackedScene" id=1]
+[ext_resource path="res://mob/person/citizen/citizen.gd" type="Script" id=2]
+[ext_resource path="res://mob/person/citizen/artificial_intelligence/artificial_intelligence.gd" type="Script" id=3]
+[ext_resource path="res://inspector_trigger/inspector_trigger.gd" type="Script" id=4]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 32, 120 )
+
+[node name="Citizen" index="0" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+movable_by_player = false
+
+[node name="AI" parent="." index="1"]
+script = ExtResource( 3 )
+
+[node name="StateMachine" parent="." index="2"]
+START_STATE = NodePath("Idle")
+
+[node name="InspectorTrigger" type="Area2D" parent="." index="7"]
+script = ExtResource( 4 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InspectorTrigger" index="0"]
+position = Vector2( -1, -39 )
+shape = SubResource( 1 )
+

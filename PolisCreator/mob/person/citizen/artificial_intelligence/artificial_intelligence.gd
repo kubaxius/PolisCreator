@@ -1,8 +1,5 @@
 extends "res://mob/base/artificial_intelligence/artificial_intelligence.gd"
 
-signal goal_set
-signal goal_completed
-
 func _ready():
 	possible_todos = [
 		"go_home",

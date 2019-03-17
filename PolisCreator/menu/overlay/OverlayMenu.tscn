@@ -1,7 +1,11 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://menu/inspector/inspector_invoker/InspectorInvoker.tscn" type="PackedScene" id=1]
+
+
+
 
 [sub_resource type="GDScript" id=1]
-
 script/source = "extends VSlider
 
 func _ready():
@@ -17,13 +21,19 @@ func _ready():
 [node name="OverlayMenu" type="CanvasLayer"]
 
 [node name="VSlider" type="VSlider" parent="."]
-anchor_left = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = -16.0
+margin_right = 16.0
+margin_bottom = 1080.0
 max_value = 1.0
 step = 0.01
 value = 1.0
 ticks_on_borders = true
 script = SubResource( 1 )
+
+[node name="VBoxContainer" parent="." instance=ExtResource( 1 )]
+visible = false
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -499.0
+margin_right = 0.0
+margin_bottom = 68.0
 
