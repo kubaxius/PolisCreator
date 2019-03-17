@@ -13,7 +13,8 @@ func _ready():
 	pass
 
 func _unhandled_input(event):
-	_debug_pathfinding(event)
+	#_debug_pathfinding(event)
+	pass
 
 func _process(delta):
 	tpos = Tool.vector_to_tile_pos(owner.position)

@@ -84,7 +84,7 @@ use={
 camera/drag_speed=1
 camera/zoom/min=0.5
 camera/zoom/max=4
-environment/time/day_length=24
+environment/time/day_length=300
 environment/time/scale=1
 environment/time/day_parts={
 "afternoon": {
@@ -106,5 +106,4 @@ environment/mob_pathfinding_groups=[ "people" ]
 [rendering]
 
 quality/2d/use_pixel_snap=true
-environment/default_clear_color=Color( 0.560784, 0.866667, 0.937255, 1 )
 environment/default_environment="res://default_env.tres"

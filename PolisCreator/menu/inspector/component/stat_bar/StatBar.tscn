@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://menu/inspector/component/stat_bar/stat_bar.gd" type="Script" id=1]
+
+[node name="StatBar" type="ProgressBar"]
+margin_right = 461.0
+margin_bottom = 100.0
+rect_min_size = Vector2( 0, 100 )
+max_value = 1.0
+percent_visible = false
+script = ExtResource( 1 )
+
