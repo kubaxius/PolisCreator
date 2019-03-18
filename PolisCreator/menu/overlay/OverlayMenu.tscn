@@ -27,9 +27,4 @@ ticks_on_borders = true
 script = SubResource( 1 )
 
 [node name="InspectorInvoker" parent="." instance=ExtResource( 1 )]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -499.0
-margin_right = 0.0
-margin_bottom = 149.0
 

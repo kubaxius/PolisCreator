@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://menu/inspector/base/base_inspector.gd" type="Script" id=1]
+
+[node name="BaseInspector" type="TabContainer" groups=[
+"inspectors",
+]]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -328.0
+margin_bottom = 994.0
+tab_align = 2
+script = ExtResource( 1 )
+
+[node name="X" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 24.0
+margin_right = -284.0
+margin_bottom = -922.0
+
+[connection signal="tab_selected" from="." to="." method="_close"]

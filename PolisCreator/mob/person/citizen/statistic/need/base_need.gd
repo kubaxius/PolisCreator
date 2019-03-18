@@ -15,10 +15,6 @@ var maximal: float setget , _get_maximal
 func _ready():
 	pass
 
-func _unhandled_input(event):
-	if event is InputEventMouseButton and event.pressed:
-		print(name+": "+String(current)+"/"+String(self.maximal))
-
 func _process(delta):
 	current += base_growth*delta
 

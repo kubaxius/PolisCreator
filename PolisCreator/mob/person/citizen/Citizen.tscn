@@ -5,12 +5,12 @@
 [ext_resource path="res://mob/person/citizen/statistic/condition/BaseCondition.tscn" type="PackedScene" id=3]
 [ext_resource path="res://mob/person/citizen/statistic/need/BaseNeed.tscn" type="PackedScene" id=4]
 [ext_resource path="res://mob/person/citizen/artificial_intelligence/artificial_intelligence.gd" type="Script" id=5]
-[ext_resource path="res://inspector_trigger/inspector_trigger.gd" type="Script" id=6]
+[ext_resource path="res://menu/inspector/inspector_trigger.gd" type="Script" id=6]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 32, 120 )
 
-[node name="Citizen" index="0" groups=[
+[node name="Citizen" groups=[
 "citizens",
 ] instance=ExtResource( 1 )]
 script = ExtResource( 2 )
